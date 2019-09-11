@@ -4,6 +4,7 @@
 
 ### Editor ###
 .idea/
+.vscode/
 
 ### input/output ###
 *.xml
