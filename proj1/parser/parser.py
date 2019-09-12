@@ -51,8 +51,9 @@ class Handler(handler.ContentHandler):
         self.content = ''
 
     def characters(self, content):
-        if content.strip():
-            self.content = content
+        content_stripped = content.strip()
+        if content_stripped:
+            self.content = content_stripped
 
     def write_pub(self, attrs):
         row = [attrs.get(field, None) for field in self.fields]
