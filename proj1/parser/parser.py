@@ -1,7 +1,10 @@
+import sys
 import csv
 import os
 from xml.sax import handler, make_parser
 
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 class Handler(handler.ContentHandler):
     def __init__(self, pub_file, pub_authors_file):
@@ -72,4 +75,4 @@ if __name__ == '__main__':
     parser = make_parser()
     dblp_handler = Handler(pub_file, pub_authors_file)
     parser.setContentHandler(dblp_handler)
-    parser.parse('/Users/caoliu/Desktop/temp.xml')
+    parser.parse('~/dblp.xml')
