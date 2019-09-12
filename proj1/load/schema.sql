@@ -1,26 +1,3 @@
-create table author
-(
-	aid SERIAL
-		constraint author_pk
-			primary key,
-	name varchar not null
-);
-
-create type month as enum(
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-);
-
 create type pubtype as enum(
     'article',
     'inproceedings',
@@ -32,6 +9,14 @@ create type pubtype as enum(
     'www'
 );
 
+create table author
+(
+	aid SERIAL
+		constraint author_pk
+			primary key,
+	name varchar not null
+);
+
 create table publication
 (
 	pubid int
@@ -39,9 +24,8 @@ create table publication
 			primary key,
 	pubkey varchar not null,
 	title varchar,
-	month month,
 	year int,
-    type pubtype
+    pubtype pubtype
 );
 
 create unique index publication_pubkey_uindex
@@ -49,14 +33,13 @@ create unique index publication_pubkey_uindex
 
 create table authored
 (
-	authoredid int
+	authoredid SERIAL
 		constraint authored_pk
 			primary key,
-	aid int
+	aid SERIAL
 		constraint authored_author_id_fk
 			references author (aid),
 	pubid int
 		constraint authored_publication_id_fk
 			references publication (pubid)
 );
-
