@@ -1,6 +1,6 @@
 create table author
 (
-	id SERIAL
+	aid SERIAL
 		constraint author_pk
 			primary key,
 	name varchar not null
@@ -34,7 +34,7 @@ create type pubtype as enum(
 
 create table publication
 (
-	id int
+	pubid int
 		constraint publication_pk
 			primary key,
 	pubkey varchar not null,
@@ -49,14 +49,14 @@ create unique index publication_pubkey_uindex
 
 create table authored
 (
-	id int
+	authoredid int
 		constraint authored_pk
 			primary key,
-	authorid int
+	aid int
 		constraint authored_author_id_fk
-			references author (id),
+			references author (aid),
 	pubid int
 		constraint authored_publication_id_fk
-			references publication (id)
+			references publication (pubid)
 );
 
