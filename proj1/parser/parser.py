@@ -3,8 +3,9 @@ import csv
 import os
 from xml.sax import handler, make_parser
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+# reload(sys)
+# sys.setdefaultencoding('utf-8')
+
 
 class Handler(handler.ContentHandler):
     def __init__(self, pub_file, pub_authors_file):
@@ -20,8 +21,8 @@ class Handler(handler.ContentHandler):
         self.authors = []
         self.content = ''
 
-        self.fpub = open(pub_file, 'w')
-        self.fpub_authors = open(pub_authors_file, 'w')
+        self.fpub = open(pub_file, 'w', encoding='utf-8')
+        self.fpub_authors = open(pub_authors_file, 'w', encoding='utf-8')
         self.pub_writer = csv.writer(self.fpub)
         self.pub_authors_writer = csv.writer(self.fpub_authors)
 
@@ -51,9 +52,8 @@ class Handler(handler.ContentHandler):
         self.content = ''
 
     def characters(self, content):
-        content_stripped = content.strip()
-        if content_stripped:
-            self.content = content_stripped
+        if content.strip():
+            self.content += content
 
     def write_pub(self, attrs):
         row = [attrs.get(field, None) for field in self.fields]
@@ -76,4 +76,4 @@ if __name__ == '__main__':
     parser = make_parser()
     dblp_handler = Handler(pub_file, pub_authors_file)
     parser.setContentHandler(dblp_handler)
-    parser.parse('~/dblp.xml')
+    parser.parse('./dblp.xml')
