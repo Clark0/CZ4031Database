@@ -1,0 +1,15 @@
+
+/*3 770.908 ms*/
+EXPLAIN ANALYZE
+SELECT TEN_YEARS, COUNT(*) AS PAPER_COUNT FROM
+    (SELECT pubkey, YEAR,
+            CASE WHEN YEAR BETWEEN 1970 AND 1979 THEN '1970s'
+                WHEN YEAR BETWEEN 1980 AND 1989 THEN '1980s'
+                WHEN YEAR BETWEEN 1990 AND 1999 THEN '1990s'
+                WHEN YEAR BETWEEN 2000 AND 2009 THEN '2000s'
+                WHEN YEAR BETWEEN 2010 AND 2019 THEN '2010s'
+                else 'other'
+            end as TEN_YEARS
+    FROM publication) AS Y
+WHERE TEN_YEARS <> 'other'
+GROUP BY TEN_YEARS;
