@@ -1,4 +1,4 @@
-create type pubtype as enum(
+CREATE TYPE pubtype AS enum (
     'article',
     'inproceedings',
     'proceedings',
@@ -9,37 +9,28 @@ create type pubtype as enum(
     'www'
 );
 
-create table author
-(
-	aid SERIAL
-		constraint author_pk
-			primary key,
-	name varchar not null
+
+CREATE TABLE author (
+    aid SERIAL CONSTRAINT author_pk PRIMARY KEY,
+    name varchar NOT NULL
 );
 
-create table publication
-(
-	pubid int
-		constraint publication_pk
-			primary key,
-	pubkey varchar not null,
-	title varchar,
-	year int,
+
+CREATE TABLE publication (
+    pubid int CONSTRAINT publication_pk PRIMARY KEY,
+    pubkey varchar NOT NULL,
+    title varchar,
+    YEAR int,
     pubtype pubtype
 );
 
-create unique index publication_pubkey_uindex
-	on publication (pubkey);
 
-create table authored
-(
-	authoredid SERIAL
-		constraint authored_pk
-			primary key,
-	aid SERIAL
-		constraint authored_author_id_fk
-			references author (aid),
-	pubid int
-		constraint authored_publication_id_fk
-			references publication (pubid)
+CREATE UNIQUE INDEX publication_pubkey_uindex ON publication (pubkey);
+
+
+CREATE TABLE authored (
+    authoredid SERIAL CONSTRAINT authored_pk PRIMARY KEY,
+    aid SERIAL,
+    pubid int,
 );
+
