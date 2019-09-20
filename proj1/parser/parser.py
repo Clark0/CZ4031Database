@@ -11,7 +11,7 @@ class Handler(handler.ContentHandler):
     def __init__(self, pub_file, pub_authors_file):
         handler.ContentHandler.__init__(self)
 
-        self.subPublication = ['article', 'book', 'incollection', 'masterthesis',
+        self.subPublication = ['article', 'book', 'incollection', 'mastersthesis',
                                'inproceedings', 'proceedings', 'phdthesis']
 
         self.fields = ['pubid', 'pubtype', 'mdate', 'pubkey',
