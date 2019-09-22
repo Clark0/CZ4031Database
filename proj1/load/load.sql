@@ -24,8 +24,8 @@ create table pub_authors_temp(
 
 COPY pub_authors_temp(pubid, author) from '/pub_authors.csv' DELIMITER ',' CSV HEADER;
 
-INSERT INTO publication (pubid, pubkey, title, year, pubtype)
-SELECT pubid, pubkey, title, year, pubtype
+INSERT INTO publication (pubid, pubkey, title, year, crossref, journal, pubtype)
+SELECT pubid, pubkey, title, year, crossref, journal, pubtype
 FROM pub_temp;
 
 INSERT INTO author (name)

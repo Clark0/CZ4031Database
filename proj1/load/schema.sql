@@ -25,6 +25,8 @@ create table publication
 	pubkey varchar not null,
 	title varchar,
 	year int,
+        crossref varchar,
+        journal varchar,
     pubtype pubtype
 );
 
