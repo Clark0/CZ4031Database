@@ -1,0 +1,13 @@
+version: "2"
+services:
+  db:
+    image: "postgres"
+    container_name: "postgres"
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+      PG_SYSTEM_SHARED_BUFFERS: 512MB
+    command: ["-c", "shared_buffers=512MB"]
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
